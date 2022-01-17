@@ -7,29 +7,26 @@ ports:
     onOpen: open-browser
 
 tasks:
-  - name: Docker Compose Pull
+  - name: Docker
+    before: clear
     init: |
       cd dev && docker-compose pull
+    command: |
+      docker-compose up
 
   - name: Initial Build
+    before: clear
     init: |
       nvm install v13.4.0
       nvm alias default v13.4.0
       make dist    
-
-  - name: Postgres Docker
-    command: |
-      docker-compose up mattermost
-
-  - name: Mattermost Docker
-    command: |
-      docker-compose up mattermost
     
   - name: Dev
+    before: clear
     init: |
+      clear
       echo "Installing dependencies! You can check the progress of each in the tabs to the right."
     command: |
-      echo "Waiting for Mattermost server to start up"
       gp await-port 8065
       PORT=8065 ./dev/greeting.sh
       
