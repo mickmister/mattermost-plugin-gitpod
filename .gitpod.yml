@@ -28,10 +28,12 @@ tasks:
       echo ""
     command: |
       echo "Once the server is running, you can use this URL to log in:"
-      echo ""
       PORT=8065 ./dev/workspace-with-port.sh
       echo ""
       gp await-port 8065
+      echo ""
+      echo "Server is running at:"
+      PORT=8065 ./dev/workspace-with-port.sh
       
 github:
   prebuilds:
