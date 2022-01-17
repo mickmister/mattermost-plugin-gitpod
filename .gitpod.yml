@@ -27,8 +27,8 @@ tasks:
       clear
       echo "Installing dependencies! You can check the progress of each in the tabs to the right."
     command: |
-      gp await-port 8065
       PORT=8065 ./dev/greeting.sh
+      gp await-port 8065
       
 github:
   prebuilds:
