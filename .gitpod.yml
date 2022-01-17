@@ -21,10 +21,10 @@ tasks:
       nvm alias default v13.4.0
       make dist
     command: |
-      echo "Run make deploy to deploy!"
+      echo "Waiting for Mattermost server to start up"
+      gp await-port 8065
+      ./dev/greeting.sh
       
-    openMode: split-right
-
 github:
   prebuilds:
     master: true
