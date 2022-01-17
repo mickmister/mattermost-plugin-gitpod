@@ -14,12 +14,12 @@ tasks:
     command: |
       docker-compose up
 
-  - name: Initial Build
+  - name: Plugin
     before: clear
     init: |
       nvm install v13.4.0
       nvm alias default v13.4.0
-      make dist    
+      make dist
     
   - name: Dev
     before: clear
@@ -34,7 +34,10 @@ tasks:
       echo ""
       echo "Server is running at:"
       PORT=8065 ./dev/workspace-with-port.sh
-      
+      echo ""
+      echo "Deploy your plugin with:"
+      echo "make deploy MM_SERVICESETTINGS_SITEURL=http://localhost:8065 MM_ADMIN_USERNAME=(your username) MM_ADMIN_PASSWORD=(your password)"
+            
 github:
   prebuilds:
     master: true
