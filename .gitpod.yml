@@ -24,10 +24,13 @@ tasks:
   - name: Dev
     before: clear
     init: |
-      clear
       echo "Installing dependencies! You can check the progress of each in the tabs to the right."
+      echo ""
     command: |
-      PORT=8065 ./dev/greeting.sh
+      echo "Once the server is running, you can use this URL to log in:"
+      echo ""
+      PORT=8065 ./dev/workspace-with-port.sh
+      echo ""
       gp await-port 8065
       
 github:
