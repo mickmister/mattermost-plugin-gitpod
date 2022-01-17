@@ -7,23 +7,31 @@ ports:
     onOpen: open-browser
 
 tasks:
-  - name: Jira and Postgres Docker
+  - name: Docker Compose Pull
     init: |
-      docker-compose pull
-    command: |
-      docker-compose up jira db
-  - name: Mattermost Docker
-    command: |
-      docker-compose up mattermost
-  - name: Plugin Development
+      cd dev && docker-compose pull
+
+  - name: Initial Build
     init: |
       nvm install v13.4.0
       nvm alias default v13.4.0
-      make dist
+      make dist    
+
+  - name: Postgres Docker
+    command: |
+      docker-compose up mattermost
+
+  - name: Mattermost Docker
+    command: |
+      docker-compose up mattermost
+    
+  - name: Dev
+    init: |
+      echo "Installing dependencies! You can check the progress of each in the tabs to the right."
     command: |
       echo "Waiting for Mattermost server to start up"
       gp await-port 8065
-      ./dev/greeting.sh
+      PORT=8065 ./dev/greeting.sh
       
 github:
   prebuilds:
